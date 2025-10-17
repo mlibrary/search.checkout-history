@@ -26,12 +26,12 @@ jobs:
           cat env.example env.actions > .env
       - name: Load .env file
         uses: xom9ikk/dotenv@v2
-      - name: Set up Ruby 3.2
+      - name: Set up Ruby 3.4
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2
+          ruby-version: 3.4
           bundler-cache: true
-      - name: Setup up node 20
+      - name: Setup up node 22
         uses: actions/setup-node@v4
         with:
           node-version: 20

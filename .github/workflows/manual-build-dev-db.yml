@@ -7,14 +7,11 @@ on:
         description: tag
         required: true
 
-env:
-  IMAGE_NAME: checkout-history-dev-db
-
 jobs:
   build-unstable:
     uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@v1
     with:
-      image_name: ${{ env.IMAGE_NAME }}
+      image_name: ${{ vars.DEV_DB_IMAGE_NAME }}
       tag: ${{ github.event.inputs.tag }}
       context: "lib/dev_db/."
       dockerfile: Dockerfile

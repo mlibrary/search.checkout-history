@@ -17,6 +17,7 @@ require "webmock"
 require "alma_rest_client"
 RSpec.configure do |config|
   include AlmaRestClient::Test::Helpers
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

@@ -1,10 +1,21 @@
-FROM ruby:3.4 AS development
+################################################################################
+# DEVELOPMENT
+################################################################################
+FROM ruby:4.0-slim-trixie@sha256:86a2ff44ce474c1c9bd11dfb2fd7fe5408a5bfe8236b9bc6013e2c6ef4c02d39 AS development
 
 ARG UID=1000
 ARG GID=1000
 ARG NODE_MAJOR=22
 
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
+  build-essential \
+  libtool \ 
+  libyaml-dev \
+  libmariadb-dev \
+  curl \
+  gpg \
+  vim\
+  git \
   apt-transport-https
 
 RUN mkdir -p /etc/apt/keyrings

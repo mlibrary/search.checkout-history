@@ -2,10 +2,10 @@
 require "spec_helper"
 require "webmock/rspec"
 require "simplecov"
-SimpleCov.start
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../config/environment", __dir__)
 
+SimpleCov.start
 # for testing rake tasks
 Rails.application.load_tasks
 

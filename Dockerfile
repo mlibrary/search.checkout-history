@@ -24,25 +24,27 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends nodejs
 
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
-  nodejs \
-  vim-tiny
-
-RUN gem install bundler
+  nodejs
 
 RUN groupadd -g ${GID} -o app
-RUN useradd -m -d /app -u ${UID} -g ${GID} -o -s /bin/bash pp
+RUN useradd -m -d /app -u ${UID} -g ${GID} -o -s /bin/bash app
+
+
+ENV GEM_HOME=/gems
+ENV PATH="$PATH:/gems/bin"
 RUN mkdir -p /gems && chown ${UID}:${GID} /gems
 
-USER pp
+ENV BUNDLE_PATH=/app/vendor/bundle
 
-ENV BUNDLE_PATH=/gems
+USER app
+RUN gem install bundler
 
 WORKDIR /app
 
-COPY --chown=${UID}:${GID} . /app
-
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]
 
+################################################################################
+# PRODUCTION                                                                   #
 FROM development AS production
 
 ENV BUNDLE_WITHOUT=development:test

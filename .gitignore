@@ -8,6 +8,9 @@
 /.bundle
 /.cache/
 
+# ignore vended gems
+/vendor
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*

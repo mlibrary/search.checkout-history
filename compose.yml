@@ -1,33 +1,46 @@
 services:
-  web:
-    build: 
+  app:
+    build:
       context: .
       target: development
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+    depends_on:
+      - 'database'
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+      - env.development
+  web:
+    build:
+      context: .
+      target: development
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+    depends_on:
+      - 'database'
     ports:
       - "3000:3000"
       - "9394:9394"
     volumes:
       - .:/app
-      - gem_cache:/gems
     env_file:
       - .env
       - env.development
-
   database:
     build: lib/dev_db/.
-
   falma:
     build: ./fake_alma/.
     ports:
       - "4444:4567"
     volumes:
       - ./fake_alma/.:/app
-
   pushgateway:
     image: prom/pushgateway
     ports:
       - 9091:9091
-
 volumes:
-  gem_cache:
   db_data:

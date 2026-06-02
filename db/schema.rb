@@ -10,33 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_23_161547) do
-  create_table "auth_tokens", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "token"
-    t.string "name"
+ActiveRecord::Schema[8.1].define(version: 2024_12_23_161547) do
+  create_table "auth_tokens", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "name"
+    t.string "token"
     t.datetime "updated_at", null: false
   end
 
-  create_table "loans", id: :string, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "user_uniqname", null: false
-    t.string "title"
+  create_table "loans", id: :string, charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "author"
-    t.string "mms_id"
-    t.datetime "return_date", precision: nil
-    t.datetime "checkout_date", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "barcode"
     t.string "call_number"
+    t.datetime "checkout_date", precision: nil
+    t.datetime "created_at", null: false
     t.string "description"
+    t.string "mms_id"
+    t.datetime "return_date", precision: nil
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.string "user_uniqname", null: false
     t.index ["user_uniqname"], name: "index_loans_on_user_uniqname"
   end
 
-  create_table "users", primary_key: "uniqname", id: :string, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.boolean "retain_history", default: false
+  create_table "users", primary_key: "uniqname", id: :string, charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.boolean "confirmed", default: false
     t.datetime "created_at", null: false
+    t.boolean "retain_history", default: false
     t.datetime "updated_at", null: false
   end
 

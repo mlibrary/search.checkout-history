@@ -13,7 +13,7 @@ RUN mkdir -p /gems
 
 COPY Gemfile* /app/
 
-ENV BUNDLE_PATH /gems
+ENV BUNDLE_PATH=/gems
 
 #Not that much of a secret
 

@@ -2,7 +2,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.2.0"
+gem "rails", "~> 8.1.0"
 # Use mysql as the database for Active Record
 gem "mysql2", "~> 0.5"
 # Use Puma as the app server
@@ -25,7 +25,7 @@ gem "csv"
 
 gem "alma_rest_client",
   git: "https://github.com/mlibrary/alma_rest_client",
-  tag: "v2.0.0"
+  tag: "alma_rest_client/v2.2.0"
 
 group :development, :test do
   gem "debug"

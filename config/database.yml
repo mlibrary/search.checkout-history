@@ -17,18 +17,15 @@ default: &default
   password: <%= ENV.fetch("MARIADB_ROOT_PASSWORD") %>
   host: <%= ENV.fetch("DATABASE_HOST") %>
   port: <%= ENV.fetch("DATABASE_PORT", 3306) %>
-
 development:
-  <<: *default
-  database: circulation_history_development
-
+  !!merge <<: *default
+  database: checkout_history_development
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: circulation_history_test
-
+  !!merge <<: *default
+  database: checkout_history_test
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -50,7 +47,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  !!merge <<: *default
   database: circulation_history_production
   username: circulation_history
   password: <%= ENV['CIRCULATION_HISTORY_DATABASE_PASSWORD'] %>

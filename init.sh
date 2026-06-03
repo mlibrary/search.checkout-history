@@ -18,3 +18,6 @@ docker compose pull
 
 echo "📦 Installing Gems"
 docker compose run --rm app bundle install
+
+echo "🗄️ Set up DB or run migrations"
+docker compose run --rm app bundle exec bin/rails db:prepare

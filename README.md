@@ -33,9 +33,6 @@ For Rails rspec tests make sure then database is running. Then run the tests:
 docker compose run --rm app bundle exec rspec
 ```
 
-## Test database
-`lib/dev_db/Dockerfile` has instructions for creating an image of the database that's preloaded with fake data. It's intended for use with Account.
-
 ## Alma Analytics Report Backups
 
 Backup xml files of the analytics reports are located in `./config/alma_analytics_reports/`

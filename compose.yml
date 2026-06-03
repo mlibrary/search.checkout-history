@@ -1,3 +1,10 @@
+x-condition-healthy: &healthy
+  condition: service_healthy
+x-healthcheck-defaults: &healthcheck-defaults
+  interval: 5s
+  timeout: 10s
+  start_period: 10s
+  retries: 5
 services:
   app:
     build:
@@ -7,12 +14,15 @@ services:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
     depends_on:
-      - 'database'
+      database: *healthy
     volumes:
       - .:/app
     env_file:
       - .env
       - env.development
+    command:
+      - echo
+      - "hello world"
   web:
     build:
       context: .
@@ -21,7 +31,7 @@ services:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
     depends_on:
-      - 'database'
+      database: *healthy
     ports:
       - "3000:3000"
       - "9394:9394"
@@ -31,7 +41,17 @@ services:
       - .env
       - env.development
   database:
-    build: lib/dev_db/.
+    image: mariadb
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      !!merge <<: *healthcheck-defaults
+      test: ["CMD", "healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
+    environment:
+      - MARIADB_ROOT_PASSWORD=password
+      - MARIADB_USER=user
+      - MARIADB_PASSWORD=password
+      - MARIADB_DATABASE=database
   falma:
     build: ./fake_alma/.
     ports:
@@ -43,4 +63,4 @@ services:
     ports:
       - 9091:9091
 volumes:
-  db_data:
+  database:

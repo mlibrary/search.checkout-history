@@ -8,10 +8,10 @@ jobs:
       mariadb:
         image: mariadb:10
         env:
-          MARIADB_USER: circulation_history
-          MARIADB_PASSWORD: circulation_history_db_password
-          MARIADB_DATABASE: circulation_history_test
-          MARIADB_ROOT_PASSWORD: pass
+          MARIADB_USER: user
+          MARIADB_PASSWORD: password
+          MARIADB_DATABASE: checkout_history_test
+          MARIADB_ROOT_PASSWORD: password
         ports: ["3306:3306"]
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     steps:
